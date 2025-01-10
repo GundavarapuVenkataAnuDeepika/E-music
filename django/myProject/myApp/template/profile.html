@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        h2, h3 {
+            text-align: center; 
+        }
+        ul {
+            list-style-type: none; 
+            padding: 0;
+        }
+        li {
+            margin: 10px 0; 
+        }
+        .profile-picture {
+            max-width: 150px; 
+            border-radius: 50%; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="container"> 
+    <button class="back-button" onclick="window.history.back();">Back</button>
+    <div class="settings-section">
+        <h3>Welcome, {{ user.username }}</h3> 
+    </div>
+    
+    <div class="container">
+        <h2>Login Details</h2>
+        <ul>
+            <li><strong>Username:</strong> {{user.username}}</li>
+            <li><strong>Email:</strong> {{user.email}}</li>
+            <li><strong>FirstName:</strong> {{user.first_name}}</li>
+            <li><strong>LastName:</strong> {{user.last_name}}</li>
+            <li><strong>Last Login:</strong> {{ user.last_login }}</li>
+            <li><strong>Date Joined:</strong> {{ user.date_joined }}</li>
+        </ul>
+    </div>
+    
+    <div class="container">
+        <h2>Profile Information</h2> 
+        <div>
+            {% if profile.profile_picture %}
+                <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+            {% else %}
+                <p>No profile picture uploaded.</p>
+            {% endif %}
+        </div>  
+    </div>
+</div>
+
+</body>
+</html>

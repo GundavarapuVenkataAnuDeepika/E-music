@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <ul>
+        {% for track in tracks %}
+            <li>
+                <h2>{{ track.name }}</h2>
+                <p>By: </p>
+                <ul>
+                    {% for artist in track.artists %}
+                        <li>{{ artist.name }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

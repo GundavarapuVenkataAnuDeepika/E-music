@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+        }
+        .notification {
+            background-color: #e9ffe9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Notifications</h2>
+<button class="back-button" onclick="window.history.back();">Back</button>
+<div id="notifications-container"></div>
+
+<script>
+    // Function to load notifications from localStorage
+    function loadNotifications() {
+        const notificationsContainer = document.getElementById('notifications-container');
+        const notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+
+        if (notifications.length === 0) {
+            notificationsContainer.innerHTML = '<p>No notifications available.</p>';
+            return;
+        }
+
+        notifications.forEach(notification => {
+            const notificationDiv = document.createElement('div');
+            notificationDiv.className = 'notification';
+            notificationDiv.textContent = notification;
+            notificationsContainer.appendChild(notificationDiv);
+        });
+    }
+
+    // Load notifications when the page is loaded
+    window.onload = loadNotifications;
+</script>
+
+</body>
+</html>

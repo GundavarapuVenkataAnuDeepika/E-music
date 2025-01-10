@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Settings</title>
+    <style>
+        /* Basic styles for better presentation */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            text-align: center; /* Centering the heading */
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .success-message {
+            color: green;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .response {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #e9ffe9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <button class="back-button" onclick="window.history.back();">Back</button>
+    <form id="profile-form">
+        <div class="settings-section">
+            <h2>Profile</h2> 
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter your Username" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter your email address" required> 
+
+            <div class="faq-item">
+                <label for="profile-pic">Profile Picture</label>
+                <input type="file" id="profile-pic" accept="image/*">
+            </div>
+        </div>
+
+        <div class="account-setting">
+            <h2>Account Settings</h2>
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your Password" required>
+
+            <label for="language">Language</label> 
+            <select id="language" required>
+                <option value="en">English</option>
+                <option value="tn">Tamil</option>
+                <option value="ml">Malayalam</option>
+                <option value="hi">Hindi</option> 
+                <option value="tl">Telugu</option> 
+            </select>
+        </div>
+
+        <div class="not-set">
+            <h2>Preferences</h2> 
+            <label for="notifications">Email Notification</label> 
+            <select id="notifications">
+                <option value="enabled">Enabled</option>
+                <option value="disabled">Disabled</option>
+            </select>
+
+            <label for="theme">Theme</label>
+            <select id="theme">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div>
+
+        <button type="submit" class="button">Save & Submit</button> 
+        <div id="success-message" class="success-message"></div>
+    </form>
+
+    <div id="response" class="response" style="display: none;"></div>
+</div>
+
+<script>
+    document.getElementById('profile-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Collect form data
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const language = document.getElementById('language').value;
+    const notifications = document.getElementById('notifications').value;
+    const theme = document.getElementById('theme').value;
+
+    // Create a response message
+    const responseMessage = `
+        <h3>Submitted Information:</h3>
+        <p><strong>Username:</strong> ${username}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Password:</strong> ${password}</p>
+        <p><strong>Language:</strong> ${language}</p>
+        <p><strong>Email Notifications:</strong> ${notifications}</p>
+        <p><strong>Theme:</strong> ${theme}</p>
+    `;
+
+    // Display the response message
+    const responseDiv = document.getElementById('response');
+    responseDiv.innerHTML = responseMessage;
+    responseDiv.style.display = 'block'; // Show the response div
+    const notificationMessage = "Settings updated";
+
+// Store the notification in localStorage
+const existingNotifications = JSON.parse(localStorage.getItem('notifications')) || [];
+existingNotifications.push(notificationMessage);
+localStorage.setItem('notifications', JSON.stringify(existingNotifications));
+    // Optionally, reset the form
+    const newSongNotification = "New song released on Spotify! Check it out!";
+    existingNotifications.push(newSongNotification);
+
+    localStorage.setItem('notifications', JSON.stringify(existingNotifications));
+
+    document.getElementById('profile-form').reset();
+});
+document.getElementById('theme').addEventListener('change', function() {
+        const selectedTheme = this.value;
+        if (selectedTheme === 'light') {
+            document.body.style.backgroundColor = 'white'; // Light theme
+            document.body.style.color = 'black'; // Text color for light theme
+        } else if (selectedTheme === 'dark') {
+            document.body.style.backgroundColor = 'black'; // Dark theme
+            document.body.style.color = 'white'; // Text color for dark theme
+        }
+    });
+</script>
+</body>
+</html>

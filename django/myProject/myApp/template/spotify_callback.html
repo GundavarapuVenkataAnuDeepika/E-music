@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to Your Spotify Dashboard</h1>
+    <h2>User Profile</h2>
+    
+    <p><strong>Name:</strong> {{ user_data.display_name }}</p>
+    <p><strong>Email:</strong> {{ user_data.email }}</p>
+    <p><strong>Spotify ID:</strong> {{ user_data.id }}</p>
+
+    {% if user_data.images %}
+        <h3>Profile Picture</h3>
+        <img src="{{ user_data.images.0.url }}" alt="Profile Picture" width="200" height="200">
+    {% else %}
+        <p>No profile picture available.</p>
+    {% endif %}
+
+    <!-- Log out link (could log out from the app or redirect to Spotify logout) -->
+    <a href="{% url 'spotify_logout' %}">Log out</a>
+</body>
+</html>

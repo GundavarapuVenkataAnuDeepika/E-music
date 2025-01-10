@@ -1,0 +1,49 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="colorlib.com">
+    <title>Search Results</title>
+</head>
+<body>
+<div class="s128">
+    <div class="inner-form">
+        <div class="row">
+            <div style="width: 90%">
+                {% if key and value %}
+                    <iframe src="https://open.spotify.com/{{key}}/{{value}}" width="90%" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                {% else %}
+                    <p>No results to display.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>-->
+<!-- search.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search for a Track</h1>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ search.as_p }}  <!-- Render the search form -->
+        <button type="submit">Search</button>
+    </form>
+
+    {% if key and value %}
+        <h2>Track Found:</h2>
+        <iframe src="https://open.spotify.com/embed/track/{{ value }}" width="90%" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    {% elif message %}
+        <p>{{ message }}</p>
+    {% endif %}
+</body>
+</html>

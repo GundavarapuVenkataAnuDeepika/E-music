@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+    body {
+            font-family: Arial, sans-serif;
+            background: url('https://static.vecteezy.com/system/resources/thumbnails/030/963/078/small_2x/of-abstract-music-background-with-notes-and-bokeh-lights-illustration-music-icon-song-time-wavy-shape-generative-ai-photo.jpg') no-repeat center center fixed;
+            background-size: cover;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    
+    .container {
+        text-align: center;
+        padding: 20px;
+        border-radius: 8px;
+    }
+    
+    h1 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+    
+    .button {
+        text-decoration: none;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    
+    .button:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color:white;">Welcome</h1>
+        <div class="button-group">
+            <a href="{% url 'login' %}" class="button">Login</a>
+            <a href="{% url 'register' %}" class="button">Register</a>
+        </div>
+    </div>
+</body>
+</html>

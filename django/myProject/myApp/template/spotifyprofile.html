@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://source.unsplash.com/1920x1080/?music') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+        }
+
+        .profile-header h1 {
+            font-size: 2rem;
+            margin: 15px 0;
+        }
+
+        .profile-header p {
+            font-size: 1rem;
+            color: #ccc;
+        }
+
+        .playlists {
+            margin-top: 30px;
+        }
+
+        .playlists h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #31a80d;
+        }
+
+        .playlists ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .playlists ul li {
+            background: rgba(255, 255, 255, 0.1);
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .playlists ul li span {
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .playlists ul li a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 0.9rem;
+        }
+
+        .playlists ul li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <img src="{{ user_profile.images.0.url }}" alt="Profile Picture">
+            <h1>{{ user_profile.display_name }}</h1>
+            <p>Email: {{ user_profile.email }}</p>
+            <p>Followers: {{ user_profile.followers.total }}</p>
+        </div>
+        <div class="playlists">
+            <h2>Your Playlists</h2>
+            <ul>
+                {% for playlist in playlists %}
+                <li>
+                    <span>{{ playlist.name }} - {{ playlist.tracks.total }} tracks</span>
+                    <a href="{{ playlist.external_urls.spotify }}" target="_blank">View on Spotify</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
